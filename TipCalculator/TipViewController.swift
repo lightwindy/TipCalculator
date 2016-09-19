@@ -59,7 +59,7 @@ class TipViewController: UIViewController {
     @IBAction func calculateTip(_ sender: AnyObject) {
         let tipPercentages = [0.15, 0.18, 0.20]
         billField.textAlignment = .right
-        billField.placeholder = "Enter the amount"
+        billField.placeholder = "Enter The Amount"
         billField.clearsOnBeginEditing = .init(true)
         let bill = Double(billField.text!) ?? 0
         let tip = bill * tipPercentages[tipControl.selectedSegmentIndex]
@@ -74,10 +74,15 @@ class TipViewController: UIViewController {
     }
 
     func loadUserDefault() {
-        
+        let colors = [UIColor.purple, UIColor.green, UIColor.orange]
         let defaults = UserDefaults.standard
+        
         tipValue = defaults.integer(forKey: "defaultTipPercentage")
         tipControl.selectedSegmentIndex = tipValue
+        calculateTip(tipControl)
+        
+        let colorValue = defaults.integer(forKey: "defaultColor")
+        self.view.backgroundColor = colors[colorValue]
         
     }
     
